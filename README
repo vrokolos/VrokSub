@@ -1,0 +1,52 @@
+This c# (.net) open source command line utility will automatically download subtitles for your movies, rename your movies using a customized format, create folders for your movies and download imdb covers and details. You just pass a folder path and a preferred language list and it searches for subtitles using your avi files. It uses opensubtitles for the search and it requires the .net 2 framework runtimes which you probably already have.
+
+
+
+Useage:
+vroksub.exe "Path?" Code Sequence? Params?
+
+Folder Path: The path to the folder that has all your movies. VrokSub? will search all subfolders of this path for movies.
+
+Language Code Sequence: A sequence of two letter language codes according to your preference separated by coma. You can find the two letter codes here: http://www.loc.gov/standards/iso639-2/php/code_list.php VrokSub? will search subtitles of the first language code and if it doesn't find one it will continue to the next code.
+
+Params:
+
+/rename will rename all the movies for which vroksub has found a subtitle using the format found in vroksub.exe.config.
+
+/newonly will only try to locate subtitles for movies without subtitles and ignore the ones that have subtitles already
+
+/nfo will download data from imdb.com (like actors, directors etc) and save them to a .nfo file named like your movie
+
+/covers will download the cover images imdb uses and save them to a .jpg file named like your movie
+
+/folders will create a folder for each movie and move all files there. If /covers is used with this then a folder.jpg will also be created so that whenever you browser your output folder with explorer's thumbnail view, this cover will be displayed over the folder icon.
+
+/move="Path?" will move all files and folders for movies with available subtitles to the given path. Useful if combined with /folders so you don't have both old and new folders in the same directory
+
+Config:
+Edit your vroksub.exe.config to alter the way vroksub renames your movie files with /rename or creates folders with /folders.
+
+CDFormat is the format used for the current CD. %C is the CD number.
+
+FileFormat? is the format used for renaming your movies. %M is movie, %C is the CD string after format and %Y is year
+
+Example1: %M renames to Casablanca Example2: %M(%Y)%C renames to Casablanca(1942)-CD1.avi
+
+FolderFormat? is the format used for the /folders parameter to get each folder's name.
+
+Example1: %M%Y creates outputPath\Casablanca(1942) Example2: %Y\\%M creates outputPath\1942\Casablanca
+
+Examples:
+vroksub.exe "c:\my videos" gr,en
+
+This will first try to locate a greek subtitle for every movie in c:\my videos (including subfolders) and if it doesn't find one it will try to find one in english. You can use more language codes if you'd like.
+
+vroksub.exe "c:\my videos" gr,en /rename will also rename all movies where subtitle has been found with the format found in vroksub.exe.config. default: MovieName?(Year)-CD2.avi
+
+vroksub.exe "c:\my videos" gr,en /newonly will only search for subtitles for movies that don't have a subtitle already.
+
+
+
+vroksub.exe "c:\unsubbedvideos" nl /rename /folders /nfo /covers /move="c:\my videos" 1) Creates a folder for each movie under "c:\my videos" with the name format found in vroksub.exe.config 2) Renames each movie using the format found in vroksub.exe.config 3) Downloads dutch subtitles for each movie 4) Downloads imdb details and saves them to the output folder 5) Downloads imdb covers and saves them to the output folder as folder.jpg and movie.jpg
+
+Note: Only movies with available subtitles will be affected (the language sequence parameter is required)
