@@ -89,7 +89,7 @@ namespace OSDbClient
         public subRes[] data { get; set; }
         public double seconds { get; set; }
     }
-    
+
     public class subInfo
     {
         [XmlRpcMissingMapping(MappingAction.Ignore)]
@@ -160,13 +160,13 @@ namespace OSDbClient
                 }
             }
             FileStream fStream = new FileStream(GetSubtitleFileName(), FileMode.CreateNew);
-			
+
 			BinaryWriter bw = new BinaryWriter(fStream);
 
 			bw.Write(subtitle);
 
 			bw.Close();
-			
+
 			fStream.Close();
         }
 
@@ -314,10 +314,10 @@ namespace OSDbClient
                     newName = newName.Replace("%Y", subRes.MovieYear);
                     newName = newName.Replace("%C", cdStr);
 //                    string newName = Path.GetDirectoryName(filename) + "\\" + FilenameFromTitle(subRes.MovieName) + "(" + subRes.MovieYear + ")" + cdStr + Path.GetExtension(filename);
-                    if (!File.Exists(newName)) { 
+                    if (!File.Exists(newName)) {
                         try
                         {
-                            File.Move(filename, newName); 
+                            File.Move(filename, newName);
                             originalfilename = Path.GetFileName( filename );
                             filename = newName;
                         }  catch (Exception ex) {
@@ -347,7 +347,7 @@ namespace OSDbClient
                         {
                             Console.WriteLine("Could not create directory: " + filename + "\n" + ex.Message);
                         }
-                    } 
+                    }
                     if (Path.GetDirectoryName(filename) != newName)
                     {
                         try

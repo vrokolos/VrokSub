@@ -210,8 +210,8 @@ namespace OSDbClient
                 #endregion
                 if (myFiles.Count != 0)
                 {
-                    
-                
+
+
                 Console.WriteLine("Creating subtitle request from movie files");
                 #region Create subtitle request from movie files
                 langs = Get3CodeStr(LangArg).Split(',');
